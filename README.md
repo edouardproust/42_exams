@@ -13,5 +13,6 @@ OR
 
 ##  TODO
 
-- `ft_split`: Do it quicker
-- `print_binary`: Check solutions using bitwise operators: `<<`, `>>`, etc.)
+- `ft_split`: do it quicker
+- `swap_bits.c`: review bitwise operators
+- `rostring`: check for am easier solution

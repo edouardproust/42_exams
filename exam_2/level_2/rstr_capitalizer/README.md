@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : rstr_capitalizer
 Expected files   : rstr_capitalizer.c
 Allowed functions: write
@@ -25,3 +28,4 @@ seconD tesT A littlE biT   moaR compleX$
    but... thiS iS noT thaT compleX$
      okay, thiS iS thE lasT 1239809147801 buT noT    thE leasT    T$
 $>
+```

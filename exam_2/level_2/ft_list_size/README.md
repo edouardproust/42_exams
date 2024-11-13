@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : ft_list_size
 Expected files   : ft_list_size.c
 Allowed functions: 
@@ -17,3 +20,4 @@ typedef struct    s_list
     struct s_list *next;
     void          *data;
 }                 t_list;
+```

@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : add_prime_sum
 Expected files   : add_prime_sum.c
 Allowed functions: write, exit
@@ -20,3 +23,4 @@ $>./add_prime_sum 7 | cat -e
 $>./add_prime_sum | cat -e
 0$
 $>
+```

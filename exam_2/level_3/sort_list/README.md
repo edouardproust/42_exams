@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : sort_list
 Expected files   : sort_list.c
 Allowed functions: 
@@ -30,3 +33,4 @@ int ascending(int a, int b)
 {
 	return (a <= b);
 }
+```

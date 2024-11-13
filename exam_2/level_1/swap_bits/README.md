@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : swap_bits
 Expected files   : swap_bits.c
 Allowed functions:
@@ -18,3 +21,4 @@ _____________
      \ /
      / \
  0001 | 0100
+```

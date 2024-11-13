@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : pgcd
 Expected files   : pgcd.c
 Allowed functions: printf, atoi, malloc, free
@@ -23,3 +26,4 @@ $> ./pgcd 17 3 | cat -e
 1$
 $> ./pgcd | cat -e
 $
+```

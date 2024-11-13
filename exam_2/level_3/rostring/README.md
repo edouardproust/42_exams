@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : rostring
 Expected files   : rostring.c
 Allowed functions: write, malloc, free
@@ -32,3 +35,4 @@ $>
 $>./rostring | cat -e
 $
 $>
+```

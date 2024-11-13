@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : rev_wstr
 Expected files   : rev_wstr.c
 Allowed functions: write, malloc, free
@@ -27,3 +30,4 @@ Leviosa Wingardium$
 $> ./rev_wstr | cat -e
 $
 $>
+```

@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : max
 Expected files   : max.c
 Allowed functions:
@@ -13,3 +16,4 @@ the array.
 The function returns the largest number found in the array.
 
 If the array is empty, the function returns 0.
+```

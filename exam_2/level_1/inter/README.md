@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : inter
 Expected files   : inter.c
 Allowed functions: write
@@ -21,3 +24,4 @@ $>./inter rien cette phrase ne cache rien | cat -e
 rien$
 $>./inter | cat -e
 $
+```

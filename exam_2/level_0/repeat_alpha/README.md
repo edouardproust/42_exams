@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : repeat_alpha
 Expected files   : repeat_alpha.c
 Allowed functions: write
@@ -28,3 +31,4 @@ $>./repeat_alpha  | cat -e
 $
 $>
 
+```

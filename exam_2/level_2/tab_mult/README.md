@@ -1,3 +1,6 @@
+## Subject
+
+```
 Assignment name  : tab_mult
 Expected files   : tab_mult.c
 Allowed functions: write
@@ -36,3 +39,4 @@ $>
 $>./tab_mult | cat -e
 $
 $>
+```

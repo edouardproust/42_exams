@@ -16,3 +16,4 @@ OR
 - `ft_split`: do it quicker
 - `swap_bits.c`: review bitwise operators
 - `rostring`: check for am easier solution
+- `lcm`: review code before exam

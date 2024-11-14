@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:37:58 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/14 15:58:00 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/14 16:01:03 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static void	dfs(char **area, int r, int c, int c_max, int r_max, char character)
 void	flood_fill(char **area, t_point size, t_point begin)
 {
 	int	c = begin.x;
-	int r = begin.y;
+	int	r = begin.y;
 	int	c_max = size.x - 1;
 	int	r_max = size.y - 1;
-
+`
 	dfs(area, r, c, c_max, r_max, area[r][c]);
 }
 

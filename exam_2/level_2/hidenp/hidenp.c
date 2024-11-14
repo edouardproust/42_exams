@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 03:01:08 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/14 04:16:42 by eproust          ###   ########.fr       */
+/*   Created: 2024/11/14 14:03:59 by eproust           #+#    #+#             */
+/*   Updated: 2024/11/14 14:33:12 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-char *ft_strchr(char c, char *s)
+static char	*ft_strchr(char c, char *s)
 {
-	while(*s)
+	while (*s)
 	{
 		if (c == *s)
 			return (s);
@@ -25,12 +25,16 @@ char *ft_strchr(char c, char *s)
 
 int	hidenp(char *s1, char *s2)
 {
+	char	*i;
+
+	if (*s1 == '\0')
+		return (1);
 	while (*s1)
 	{
-		s2 = ft_strchr(*s1, s2);
-		if (!s2)
+		i = ft_strchr(*s1, s2);
+		if (!i)
 			return (0);
-		s2++;
+		s2 += (i - s2) + 1;
 		s1++;
 	}
 	return (1);
@@ -38,13 +42,13 @@ int	hidenp(char *s1, char *s2)
 
 int	main(int ac, char **av)
 {
-	char	c;
+	int	res;
 
 	if (ac == 3)
 	{
-		c = hidenp(av[1], av[2]) + '0';
-		write(1, &c, 1);
+		res = hidenp(av[1], av[2]) + '0';
+		write(1, &res, 1);
 	}
-	write (1, "\n", 1);
+	write(1, "\n", 1);
 	return (0);
 }

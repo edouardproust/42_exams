@@ -6,23 +6,14 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:08:24 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/14 20:29:42 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/15 14:21:45 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
 
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i]);
-	return (i);
-}
-
-int	ft_putstr(const char *str)
+static int	put_string(const char *str)
 {
 	size_t	written;
 
@@ -32,23 +23,12 @@ int	ft_putstr(const char *str)
 	else
 	{
 		while (*str)
-		written += write(1, str++, 1);
+			written += write(1, str++, 1);
 	}
 	return (written);
 }
 
-int	ft_puthexa(unsigned int n, int written)
-{
-	char	*base;
-
-	base = "0123456789abcdef";
-	if (n >= 16)
-		written = ft_puthexa(n / 16, written);		
-	written += write(1, &base[n % 16], 1);
-	return (written);
-}
-
-int	ft_putnbr(int n, int written)
+static int	put_decimal(int n, int written)
 {
 	long	nl;
 	char	c;
@@ -60,9 +40,46 @@ int	ft_putnbr(int n, int written)
 		written += write(1, "-", 1);
 	}
 	if (nl >= 10)
-		written = ft_putnbr(nl / 10, written);
+		written = put_decimal(nl / 10, written);
 	c = nl % 10 + '0';
 	written += write(1, &c, 1);
+	return (written);
+}
+
+static int	put_hexa(unsigned int n, int written)
+{
+	char	*base;
+
+	base = "0123456789abcdef";
+	if (n >= 16)
+		written = put_hexa(n / 16, written);
+	written += write(1, &base[n % 16], 1);
+	return (written);
+}
+
+static int	put_format(va_list ap, char c)
+{
+	int		written;
+	char	*s;
+	int		d;
+	int		x;
+
+	written = 0;
+	if (c == 's')
+	{
+		s = va_arg(ap, char *);
+		written += put_string(s);
+	}
+	else if (c == 'd')
+	{
+		d = va_arg(ap, int);
+		written += put_decimal(d, 0);
+	}
+	else if (c == 'x')
+	{
+		x = va_arg(ap, int);
+		written += put_hexa(x, 0);
+	}
 	return (written);
 }
 
@@ -71,9 +88,6 @@ int	ft_printf(const char *fmt, ...)
 	int		written;
 	va_list	ap;
 	int		flag;
-	char	*s;
-	int		d;
-	int		x;
 
 	written = 0;
 	va_start(ap, fmt);
@@ -86,22 +100,8 @@ int	ft_printf(const char *fmt, ...)
 			written += write(1, fmt, 1);
 		else if (flag == 1)
 		{
+			written += put_format(ap, *fmt);
 			flag = 0;
-			if (*fmt == 's')
-			{
-				s = va_arg(ap, char *);
-				written += ft_putstr(s);
-			}
-			else if (*fmt == 'd')
-			{
-				d = va_arg(ap, int);
-				written += ft_putnbr(d, 0);
-			}
-			else if (*fmt == 'x')
-			{
-				x = va_arg(ap, int);
-				written += ft_puthexa(x, 0);
-			}
 		}
 		fmt++;
 	}

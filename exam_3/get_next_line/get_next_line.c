@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 19:15:14 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/20 20:12:40 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/20 20:21:51 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+/*
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -161,3 +162,4 @@ int	main(void)
 	}
 	return (0);
 }
+*/

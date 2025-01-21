@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 19:15:14 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/20 20:21:51 by eproust          ###   ########.fr       */
+/*   Created: 2025/01/21 09:55:38 by eproust           #+#    #+#             */
+/*   Updated: 2025/01/21 11:27:21 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+#include <unistd.h>
+#include <stdlib.h>
 
-# include <stdlib.h>
-# include <unistd.h>
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1024
+#endif
 
-static void	free_ptr(char **p)
+void	ft_free(char **p)
 {
 	if (p && *p)
 	{
@@ -26,7 +26,7 @@ static void	free_ptr(char **p)
 	}
 }
 
-static int	str_len(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
@@ -36,8 +36,10 @@ static int	str_len(char *s)
 	return (i);
 }
 
-static char	*str_chr(char *s, char c)
+char	*ft_strchr(char *s, char c)
 {
+	if (!s)
+		return (NULL);
 	while (*s)
 	{
 		if (*s == c)
@@ -47,28 +49,28 @@ static char	*str_chr(char *s, char c)
 	return (NULL);
 }
 
-static char	*str_sub(char *s, int start, int len)
+char	*ft_substr(char *s, int start, int len)
 {
 	char	*sub;
-	int		i;
+	int	i;
 
 	sub = malloc(sizeof(char) * (len + 1));
 	i = 0;
-	while (s[start] && i < len)
-		sub[i++] = s[start++]; 
+	while (i < len && s[start])
+		sub[i++] = s[start++];
 	sub[i] = '\0';
 	return (sub);
 }
 
-static char	*str_join(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*join;
 	int		i;
 	int		j;
 
-	if (s1 == NULL)
-		return (str_sub(s2, 0, str_len(s2)));
-	join = malloc(sizeof(char) * (str_len(s1) + str_len(s2) + 1));
+	if (!s1)
+		return (ft_substr(s2, 0, ft_strlen(s2)));
+	join = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	i = 0;
 	while (s1[i])
 	{
@@ -87,79 +89,76 @@ static char	*str_join(char *s1, char *s2)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
-	char		*line;
-	char		*buffer;
-	int			br;
-	char		*new_stash;
-	int			i;
-	int			line_len;
-	int			stash_len;
-	char		*stash_tmp;
+	static char	*stash = NULL;
+	char	*line = NULL;
+	char	*buffer;
+	int		bytes_read;
+	char	*new_stash;
+	int		i;
+	int		line_len;
+	int		stash_len;
+	char	*stash_tmp;
 
 	// fill_stash
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	buffer[0] = '\0';
-	br = 1;
-	while (!str_chr(buffer, '\n') && br > 0)
+	bytes_read = 1;
+	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
 	{
-		br = read(fd, buffer, BUFFER_SIZE);
-		buffer[br] = '\0';
-		new_stash = str_join(stash, buffer);
-		free_ptr(&stash);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		buffer[bytes_read] = '\0';
+		new_stash = ft_strjoin(stash, buffer);
+		ft_free(&stash);
 		stash = new_stash;
 	}
-	free(buffer);
-
-	// set_line
+	ft_free(&buffer);
+	
+	// fill_line
 	i = 0;
 	while (stash[i] != '\n' && stash[i] != '\0')
 		i++;
 	if (stash[i] == '\0' && i > 0)
 		i--;
-	line = str_sub(stash, 0, i + 1);
-
-	// gnl end condition
-	if (str_len(line) == 0)
+	line = ft_substr(stash, 0, i + 1);
+	
+	// exit_condition
+	line_len = ft_strlen(line);
+	if (line_len == 0)
 	{
-		free_ptr(&line);
-		free_ptr(&stash);
+		ft_free(&line);
+		ft_free(&stash);
 		return (NULL);
 	}
 
 	// update_stash
-	line_len = str_len(line);
-	stash_len = str_len(stash);
+	stash_len = ft_strlen(stash);
 	if (stash_len == line_len)
-		free_ptr(&stash);
+		ft_free(&stash);
 	else
 	{
-		stash_tmp = str_sub(stash, line_len, stash_len);
-		free_ptr(&stash);
+		stash_tmp = ft_substr(stash, i + 1, ft_strlen(stash));
+		ft_free(&stash);
 		stash = stash_tmp;
 	}
+
 	return (line);
 }
 
 /*
-#include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 int	main(void)
 {
-	char	*file = "./test";
-	int		fd;
-	char	*s;
-
-	fd = open(file, O_RDONLY);
+	int fd = open("test", O_RDONLY);
+	
 	while (1)
 	{
-		s = get_next_line(fd);
-		if (!s)
+		char *line = get_next_line(fd);
+		if (!line)
 			break;
-		printf("%s", s);
-		free(s);
+		printf("%s", line);
+		free(line);
 	}
-	return (0);
 }
 */

@@ -29,9 +29,21 @@ Write a program that will behave like executing a shell command. The command lin
 
 - Your program should be able to manage more than hundreds of "|" even if we limit the number of "open files" to less than 30.
 
-Example that should work : 
+Example that should work :
 $>./microshell /bin/ls "|" /usr/bin/grep microshell ";" /bin/echo i love my microshell
 microshell
 i love my microshell
 $>
+```
+
+## Extra
+```
+Compilation:
+$> cc -Wextra -Wall -Werror microshell.c
+
+More tests:
+$> ./a.out cd .. ";" /bin/ls "|" /bin/grep micro
+$> ./a.out cd .. ";" /bin/ls
+$> ./a.out /bin/ls "|" /bin/grep micro ";" cd .. ";" /bin/ls -l
+$> ./a.out /bin/cat microshell.c "|" /bin/grep void "|" /bin/wc -l
 ```

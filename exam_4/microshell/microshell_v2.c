@@ -81,5 +81,6 @@ int	main(int argc, char **argv, char **envp)
 				execute_cmd(argv, i, envp, saved_stdin);
 		}
 	}
+	close(saved_stdin);
 	return (EXIT_SUCCESS);
 }

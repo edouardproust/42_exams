@@ -1,4 +1,4 @@
-## Subject\n
+## Subject
 ```
 Assignment name  : cpp_module00
 Expected files   : Warlock.cpp Warlock.hpp

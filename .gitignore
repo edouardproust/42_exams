@@ -1,6 +1,10 @@
 42-EXAM
 42_EXAM
+*.swp
+*.swo
 *.bak
 *.old
 *.out
 *.sh
+*.o
+*.d

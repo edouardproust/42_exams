@@ -6,8 +6,8 @@
 class set {
 
 	searchable_bag&	bag;
- 	set::set(set const& s) : bag(s.bag);
-	set& set::operator=(set const& rhs);
+ 	set(set const& s);
+	set& operator=(set const& rhs);
 
 	public:
 

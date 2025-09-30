@@ -48,7 +48,6 @@ int main(int argc, char **argv) {
     sa.get_bag().print();
     st.print();
     sa.clear();
-	std::cout << "DEBUG: " << std::endl;
     sa.print();
     int arr[] = {1,2,3,4};
     sa.insert(

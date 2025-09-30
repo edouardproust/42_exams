@@ -26,6 +26,7 @@ void	free_grid_char(char** grid, int n) {
 	free(grid);
 }
 
+// Exactly the same as free_grid_char() but for a grid of ints
 void	free_grid_int(int** grid, int n) {
 	if (!grid) return;
 	for (int i = 0; i < n; i++)

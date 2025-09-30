@@ -6,7 +6,7 @@
 class vect2 {
 
 	int	_x;
-	int _y;
+	int	_y;
 
 	public:
 

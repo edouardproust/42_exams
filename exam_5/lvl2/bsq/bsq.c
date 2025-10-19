@@ -71,8 +71,8 @@ Map*	parse_map(FILE* f) {
 	Map* m = calloc(1, sizeof(Map));
 	if (!m) return NULL;
 	char newline;
-	if ((fscanf(f, "%d%c%c%c%c", &m->rows, &m->empt, &m->obst, &m->full, &newline) != 5)
-		|| newline != '\n' || (m->empt == m->obst || m->empt == m->full || m->obst == m->full))
+	if (fscanf(f, "%d%c%c%c%c", &m->rows, &m->empt, &m->obst, &m->full, &newline) != 5
+		|| newline != '\n' || m->empt == m->obst || m->empt == m->full || m->obst == m->full)
 			return (free(m), NULL);
 	m->grid = parse_grid(f, m);
 	if (!m->grid)

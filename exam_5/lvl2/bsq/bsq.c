@@ -70,8 +70,9 @@ char**	parse_grid(FILE* f, Map* m) {
 Map*	parse_map(FILE* f) {
 	Map* m = calloc(1, sizeof(Map));
 	if (!m) return NULL;
-	if ((fscanf(f, "%d %c %c %c\n", &m->rows, &m->empt, &m->obst, &m->full) != 4)
-		|| (m->empt == m->obst || m->empt == m->full || m->obst == m->full))
+	char newline;
+	if ((fscanf(f, "%d%c%c%c%c", &m->rows, &m->empt, &m->obst, &m->full, &newline) != 5)
+		|| newline != '\n' || (m->empt == m->obst || m->empt == m->full || m->obst == m->full))
 			return (free(m), NULL);
 	m->grid = parse_grid(f, m);
 	if (!m->grid)
@@ -124,7 +125,7 @@ void process_file(char* filename) {
 	// Cleanup
 	free_grid_char(m->grid, m->rows);
 	free(m);
-	ft_close(f);	
+	ft_close(f);
 }
 
 int	main(int ac, char** av) {
